@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <title>Welcome</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.4.0/stitch.js"></script>
+        <style>
+            code { white-space: pre}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron" style="background: url('hero.png');background-size: cover; background-position: center; background-repeat: no-repeat; height:400px;">
+
+            </div>
+            <div id="commentform">
+                <label for="txt_name">Name (Optional):</label>
+                <input type="text" name="txt_name" id="txt_name" class="form-control" />
+
+                <label for="ddl_beer">Favorite Beer:</label>
+                <select name="ddl_beer" id="ddl_beer" class="form-control">
+                    <option value="I dont drink">I don't drink</option>
+                    <option value="Lager">Lager</option>
+                    <option value="Pilsner">Pilsner</option>
+                    <option value="Sour">Sour</option>
+                    <option value="Porter">Porter</option>
+                    <option value="Stout">Stout</option>
+                    <option value="Wheat">Wheat</option>
+                    <option value="IPA">IPA</option>
+                    <option value="Other">Other</option>
+                </select>
+                <label for="ddl_exp">MongoDB Experience</label>
+                <select name="ddl_exp" id="ddl_exp" class="form-control">
+                    <option value="New">New</option>
+                    <option value="Played with it">Played with it</option>
+                    <option value="Used in prod">Used in production</option>
+                    <option value="Expert">Expert</option>
+                </select>
+              
+                <br />
+                <button onclick="insertRecord();return false;" class="btn btn-lg btn-success">Submit</button>
+                <br /><br />
+            </div>
+        </div>
+
+        <script>
+            GLOBALSTITCHAPP = "brewupwelcome-axqri";
+            GLOBALDBNAME = "welcome";
+            const client = stitch.Stitch.initializeDefaultAppClient(GLOBALSTITCHAPP);
+            const mongodb = client.getServiceClient(stitch.RemoteMongoClient.factory,"mongodb-atlas");
+            const db = mongodb.db(GLOBALDBNAME);
+
+            const {
+                Stitch,
+                AnonymousCredential,
+            } = stitch;
+
+
+            function insertRecord() {
+                client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(() => processRecord());
+            }
+
+            function processRecord() {
+                    var n = new Date();
+                    var obj = {};
+                    obj.mdb_created = n;
+                    
+                    obj.beer = $('#ddl_beer').val();
+                    obj.exp = $('#ddl_exp').val();
+                    
+                    if ($('#txt_name').val().length > 0 ) { obj.name = $('#txt_name').val() };             
+
+                    obj.browser = {};
+                    obj.browser.ua = navigator.userAgent || undefined;
+                    obj.browser.lang = navigator.language || undefined;
+                    obj.browser.plat = navigator.platform || undefined;
+                    obj.owner = client.auth.authInfo.userId;
+
+                    db.collection("responses")
+                        .insertOne(obj)
+                        .then(recordSuccess)
+                        .catch(err=>console.error(`login failed with error: ${err}`));
+
+            }
+
+            function recordSuccess() {
+                window.location = 'results.html';
+            }
+            
+
+        </script>
+    </body>
+</html>
