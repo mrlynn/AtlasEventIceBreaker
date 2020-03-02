@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.4.0/stitch.js"></script>
+        <script src="conf.js"></script>
         <style>
             code { white-space: pre}
         </style>
@@ -46,18 +47,7 @@
         </div>
 
         <script>
-            GLOBALSTITCHAPP = "brewupwelcome-axqri";
-            GLOBALDBNAME = "welcome";
-            const client = stitch.Stitch.initializeDefaultAppClient(GLOBALSTITCHAPP);
-            const mongodb = client.getServiceClient(stitch.RemoteMongoClient.factory,"mongodb-atlas");
-            const db = mongodb.db(GLOBALDBNAME);
-
-            const {
-                Stitch,
-                AnonymousCredential,
-            } = stitch;
-
-
+            
             function insertRecord() {
                 client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(() => processRecord());
             }
