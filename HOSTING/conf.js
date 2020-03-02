@@ -1,4 +1,4 @@
-GLOBALSTITCHAPP = "poll-lwxzx";
+GLOBALSTITCHAPP = "atlasicebreaker-fwrws";
 GLOBALDBNAME = "welcome";
 const client = stitch.Stitch.initializeDefaultAppClient(GLOBALSTITCHAPP);
 const mongodb = client.getServiceClient(stitch.RemoteMongoClient.factory,"mongodb-atlas");
