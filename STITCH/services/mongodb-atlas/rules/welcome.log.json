@@ -1,0 +1,19 @@
+{
+    "id": "5e5c5afebdeb7db339882b17",
+    "database": "welcome",
+    "collection": "log",
+    "roles": [
+        {
+            "name": "owner",
+            "apply_when": {
+                "owner": "%%user.id"
+            },
+            "read": true,
+            "write": true,
+            "insert": true,
+            "delete": true,
+            "additional_fields": {}
+        }
+    ],
+    "schema": {}
+}
