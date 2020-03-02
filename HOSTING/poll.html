@@ -20,17 +20,37 @@
                 <label for="txt_name">Name (Optional):</label>
                 <input type="text" name="txt_name" id="txt_name" class="form-control" />
 
-                <label for="ddl_beer">Favorite Beer:</label>
-                <select name="ddl_beer" id="ddl_beer" class="form-control">
-                    <option value="I dont drink">I don't drink</option>
-                    <option value="Lager">Lager</option>
-                    <option value="Pilsner">Pilsner</option>
-                    <option value="Sour">Sour</option>
-                    <option value="Porter">Porter</option>
-                    <option value="Stout">Stout</option>
-                    <option value="Wheat">Wheat</option>
-                    <option value="IPA">IPA</option>
-                    <option value="Other">Other</option>
+                <label for="genres">Favorite Music Genre:</label>
+
+                <select id="genres" id="genres" class="form-control">
+                    <option disabled="disabled">Genre</option>
+                        <option value="80s+%26+90s+Hits">80s &amp; 90s Hits</option>
+                        <option value="Alternative">Alternative</option>
+                        <option value="Black+History+Month">Black History Month</option>
+                        <option value="Christian+%26+Gospel">Christian &amp; Gospel</option>
+                        <option value="Classic+Rock">Classic Rock</option>
+                        <option value="Classical">Classical</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Country">Country</option>
+                        <option value="Dance">Dance</option>
+                        <option value="Hip+Hop+and+R%26B">Hip Hop and R&amp;B</option>
+                        <option value="Hispanic+Heritage+Month">Hispanic Heritage Month</option>
+                        <option value="Holiday">Holiday</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Kids+%26+Family">Kids &amp; Family</option>
+                        <option value="Mix+%26+Variety">Mix &amp; Variety</option>
+                        <option value="News+%26+Talk">News &amp; Talk</option>
+                        <option value="Oldies">Oldies</option>
+                        <option value="Personalities">Personalities</option>
+                        <option value="Pride">Pride</option>
+                        <option value="R%26B">R&amp;B</option>
+                        <option value="Reggae+%26+Island">Reggae &amp; Island</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Soft+Rock">Soft Rock</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Top+40+%26+Pop">Top 40 &amp; Pop</option>
+                        <option value="World">World</option>
                 </select>
                 <label for="ddl_exp">MongoDB Experience</label>
                 <select name="ddl_exp" id="ddl_exp" class="form-control">
@@ -61,7 +81,7 @@
                     var obj = {};
                     obj.mdb_created = n;
                     
-                    obj.beer = $('#ddl_beer').val();
+                    obj.genre = $('#genres').val();
                     obj.exp = $('#ddl_exp').val();
                     
                     if ($('#txt_name').val().length > 0 ) { obj.name = $('#txt_name').val() };             
