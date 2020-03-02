@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>Log</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.4.0/stitch.js"></script>
+        <script src="../conf.js"></script>
+        <style>
+            code { white-space: pre}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron" style="background: url('hero.png');background-size: cover; background-position: center; background-repeat: no-repeat; height:400px;">
+
+            </div>
+            <div id="commentform">
+                <label for="txt_name">Name:</label>
+                <input type="text" name="txt_name" id="txt_name" class="form-control" />
+
+                <br />
+                <button onclick="processRecord();return false;" class="btn btn-lg btn-success">Submit</button>
+                <br /><br />
+            </div>
+        </div>
+
+        <script>
+
+            function processRecord() {
+                    var n = new Date();
+                    var obj = {};
+                    obj.mdb_created = n;
+                    
+                    obj.owner = {};
+                    obj.owner.id = client.auth.authInfo.userId;
+                    obj.owner.email = client.auth.authInfo.userProfile.data.email;
+                    
+                    obj.name = $('#txt_name').val();             
+
+                    obj.browser = {};
+                    obj.browser.ua = navigator.userAgent || undefined;
+                    obj.browser.lang = navigator.language || undefined;
+                    obj.browser.plat = navigator.platform || undefined;
+                    obj.owner = client.auth.authInfo.userId;
+
+                    db.collection("log")
+                        .insertOne(obj)
+                        .then(recordSuccess)
+                        .catch(err=>console.error(`login failed with error: ${err}`));
+
+            }
+
+            function recordSuccess() {
+                window.location.reload();
+            }
+            
+
+        </script>
+    </body>
+</html>

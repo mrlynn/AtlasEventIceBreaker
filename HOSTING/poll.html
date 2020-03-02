@@ -47,6 +47,10 @@
         </div>
 
         <script>
+            const {
+                Stitch,
+                AnonymousCredential,
+            } = stitch;
             
             function insertRecord() {
                 client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(() => processRecord());
